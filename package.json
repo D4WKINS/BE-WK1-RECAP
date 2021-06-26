@@ -1,0 +1,20 @@
+{
+  "name": "BE-WK1-RECAP",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D4WKINS/BE-WK1-RECAP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/D4WKINS/BE-WK1-RECAP/issues"
+  },
+  "homepage": "https://github.com/D4WKINS/BE-WK1-RECAP#readme"
+}
