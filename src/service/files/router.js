@@ -1,5 +1,8 @@
 import {Router} from "express"
-import create from "http-errors"
+
+import createError from "http-errors"
+
+import {readFile,writeFile} from "../../utilities/file-utils.js"
 
 const router = Router()
 //routers are like mini apps
@@ -12,24 +15,23 @@ const router = Router()
 
 //router must be exported
 // const blog = {
-
 // }
-//Get all blog post's
-router.get('/',(req, res, next) => {
-    try{
-        // res.setHeader("Content-type","text/html")
-        res.send("GET ALL FILES")
 
+//Get all blog post's
+router.get("/", async (req, res, next) => {
+    try{
+        const files = await readFile("files.json")
+        res.send(files)
     }
     catch(error){
-
     }
 })
 
 //Create blog post
-router.post('/',(req, res, next) => { 
+router.post('/', async(req, res, next) => { 
     try{
-        res.send("CREATE NEW FILES")
+        const files = await writeFile ("files.json",req.body) // the request body will be sent as content to readFile
+        res.send(files)
     }
     catch(error){
 
@@ -57,16 +59,16 @@ router.put('/:id',(req,res,next) => {
 })
 
 //Delete blog post
-router.delete('/:id',(req,res,next) => {
+router.delete('/:id', (req,res,next) => {
     try{
-        const error = createError(401,'Please login to view this page')
-        if(error){
-            next(error)//  adding parameter to handler.js
-        }
-        res.send("DELETE SINGLE FILE")
+            //can only send 1 error at once
     }
-    catch(error){
-
+    catch (err){
+        const error = createError(
+            err.status || 500, 
+            err.message || "Cant delete file"
+            );
+            next(error)//  Sending parameter to handler.js
     }
 })
 
